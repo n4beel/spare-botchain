@@ -1,29 +1,33 @@
-import { HTMLAttributes } from "react";
+import React from "react";
 
-interface PanelProps extends HTMLAttributes<HTMLDivElement> {
-  elevated?: boolean;
-  noPadding?: boolean;
+interface PanelProps extends React.HTMLAttributes<HTMLDivElement> {
+  variant?: "dish" | "tray" | "paper";
 }
 
-export default function Panel({
-  elevated,
-  noPadding,
+export function Panel({
   children,
   className = "",
-  style,
+  variant = "dish",
   ...props
 }: PanelProps) {
+  let baseClass = "p-5 ";
+  if (variant === "dish") {
+    baseClass +=
+      "bg-[var(--bg-surface)] border-2 border-[var(--border-default)] rounded-2xl shadow-sm ";
+  } else if (variant === "tray") {
+    baseClass +=
+      "bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-xl ";
+  } else {
+    // Paper roll effect
+    baseClass +=
+      "bg-[#FFFDFB] border-y-2 border-x border-[var(--border-default)] rounded-md shadow-sm ";
+  }
+
   return (
-    <div
-      className={["rounded-none", noPadding ? "" : "p-5", className].join(" ")}
-      style={{
-        background: elevated ? "var(--bg-elevated)" : "var(--bg-surface)",
-        border: "1px solid var(--border-subtle)",
-        ...style,
-      }}
-      {...props}
-    >
+    <div className={`${baseClass} ${className}`} {...props}>
       {children}
     </div>
   );
 }
+
+export default Panel;

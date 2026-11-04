@@ -1,37 +1,51 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Fredoka, Quicksand } from "next/font/google";
 import { EvmProvider } from "@/components/providers/EvmProvider";
 import { ToastProvider } from "@/components/ui/Toast";
+import WrongNetworkBar from "@/components/botchain/WrongNetworkBar";
 import { app } from "@/lib/app-config";
 import "./globals.css";
 
-const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"], display: "swap" });
-const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"], display: "swap" });
+const fredoka = Fredoka({
+  subsets: ["latin"],
+  variable: "--font-fredoka",
+  display: "swap",
+});
+
+const quicksand = Quicksand({
+  subsets: ["latin"],
+  variable: "--font-quicksand",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: `${app.name} — ${app.tagline}`,
   description: app.tagline,
-  openGraph: { title: app.name, description: app.tagline, type: "website", url: app.url },
+  openGraph: {
+    title: app.name,
+    description: app.tagline,
+    type: "website",
+    url: app.url,
+  },
 };
 
-/** `width=device-width` plus a floor on zoom. Pinch-zoom stays available; nothing is locked out. */
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#0A0A0A",
+  themeColor: "#F5B5A0",
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full`}
-      // The project's accent, written once at the root. Every component reads `var(--accent)`, so
-      // this is the only place a palette change has to happen.
-      style={{ ["--accent" as string]: app.accent }}
+      className={`${fredoka.variable} ${quicksand.variable} h-full`}
     >
-      <body className="min-h-full antialiased">
+      <body className="min-h-full font-sans antialiased text-[var(--text-primary)] bg-[var(--bg-base)]">
         <EvmProvider>
+          <WrongNetworkBar />
           <ToastProvider>{children}</ToastProvider>
         </EvmProvider>
       </body>
