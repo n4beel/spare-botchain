@@ -4,15 +4,16 @@ out = "out"
 libs = ["lib"]
 test = "test"
 script = "script"
-# forge-std ships its own test suite, and those tests fail here on filesystem permissions and
-# mainnet RPC access. They are not ours and their noise buries real failures.
 no_match_path = "lib/**"
 solc_version = "0.8.23"
 optimizer = true
 optimizer_runs = 200
-# BOT Chain is an EVM L1 on an older target; `paris` avoids emitting PUSH0, which a node without
-# Shanghai rejects at deploy time with no useful error.
 evm_version = "paris"
+
+[invariant]
+runs = 256
+depth = 128
+fail_on_revert = false
 
 [fmt]
 line_length = 100
