@@ -41,11 +41,11 @@
   # secret may ever be given one of these names. Nothing in these apps needs one.
   #
   # Fill in from the output of contracts/script/Deploy.s.sol.
-  NEXT_PUBLIC_BOTCHAIN_NETWORK = "mainnet"
+  NEXT_PUBLIC_BOTCHAIN_NETWORK = "testnet"
   NEXT_PUBLIC_CONTRACT_677 = ""
   NEXT_PUBLIC_DEPLOY_BLOCK_677 = ""
-  NEXT_PUBLIC_CONTRACT_968 = ""
-  NEXT_PUBLIC_DEPLOY_BLOCK_968 = ""
+  NEXT_PUBLIC_CONTRACT_968 = "0xb93fBCFA0c47D7265297A47095C705bEb57FDb92"
+  NEXT_PUBLIC_DEPLOY_BLOCK_968 = "29503644"
 
 [[headers]]
   for = "/*"
